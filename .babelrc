@@ -1,0 +1,29 @@
+{
+    "presets": [
+        "env", "react", "stage-1","stage-2"
+    ],
+    "plugins": [
+        ["import-fix", [
+            {
+                "libraryName": "antd",
+                "libraryPath": "antd/lib/${name}/index.js",
+                "namePolicy" : "dash"
+            }
+          ]],
+          [
+          "transform-runtime",
+            {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true,
+            "moduleName": "babel-runtime"
+            }
+        ],
+        [
+            "babel-plugin-transform-require-ignore",
+            {
+              "extensions": [".sass"]
+            }]
+    ],
+    "sourceMaps": true
+}
