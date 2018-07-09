@@ -8,60 +8,61 @@ import { Table, Icon, Divider,DatePicker, Input, InputNumber, Popconfirm, Form }
 import MyTitle from '@comp/myTitle.js'
 import MyOperTable from '@comp/myOperTable.js'
 import { getbookColumns} from '@util/columns.js';
+import {components , EditableContext} from "@comp/myOperComp.js"
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const FormItem = Form.Item;
-const EditableContext = React.createContext();
+// const EditableContext = React.createContext();
 
-const EditableRow = ({ form, index, ...props }) => (
-  <EditableContext.Provider value={form}>
-    <tr {...props} />
-  </EditableContext.Provider>
-);
+// const EditableRow = ({ form, index, ...props }) => (
+//   <EditableContext.Provider value={form}>
+//     <tr {...props} />
+//   </EditableContext.Provider>
+// );
 
-const EditableFormRow = Form.create()(EditableRow);
+// const EditableFormRow = Form.create()(EditableRow);
 
-class EditableCell extends React.Component {
-  getInput = () => {
-    if (this.props.inputType === 'number') {
-      return <InputNumber />;
-    }
-    return <Input />;
-  };
+// class EditableCell extends React.Component {
+//   getInput = () => {
+//     if (this.props.inputType === 'number') {
+//       return <InputNumber />;
+//     }
+//     return <Input />;
+//   };
 
-  render() {
-    const {
-      editing,
-      dataIndex,
-      title,
-      inputType,
-      record,
-      index,
-      ...restProps
-    } = this.props;
-    return (
-      <EditableContext.Consumer>
-        {(form) => {
-          const { getFieldDecorator } = form;
-          return (
-            <td {...restProps}>
-              {editing ? (
-                <FormItem style={{ margin: 0 }}>
-                  {getFieldDecorator(dataIndex, {
-                    rules: [{
-                      required: true,
-                      message: `Please Input ${title}!`,
-                    }],
-                    initialValue: record[dataIndex],
-                  })(this.getInput())}
-                </FormItem>
-              ) : restProps.children}
-            </td>
-          );
-        }}
-      </EditableContext.Consumer>
-    );
-  }
-}
+//   render() {
+//     const {
+//       editing,
+//       dataIndex,
+//       title,
+//       inputType,
+//       record,
+//       index,
+//       ...restProps
+//     } = this.props;
+//     return (
+//       <EditableContext.Consumer>
+//         {(form) => {
+//           const { getFieldDecorator } = form;
+//           return (
+//             <td {...restProps}>
+//               {editing ? (
+//                 <FormItem style={{ margin: 0 }}>
+//                   {getFieldDecorator(dataIndex, {
+//                     rules: [{
+//                       required: true,
+//                       message: `Please Input ${title}!`,
+//                     }],
+//                     initialValue: record[dataIndex],
+//                   })(this.getInput())}
+//                 </FormItem>
+//               ) : restProps.children}
+//             </td>
+//           );
+//         }}
+//       </EditableContext.Consumer>
+//     );
+//   }
+// }
 const data = [{
     key: '1',
     id:'1',
@@ -107,6 +108,8 @@ class Grounding extends Component{
         this.state = {
             sortedBookInfo:'',
             editingKey:'',
+            searchModle:false,
+            insertModle:false,
             data
         }
     }
@@ -128,10 +131,13 @@ class Grounding extends Component{
             sortedBookInfo:sorter
         })
     }
+
     edit = (key)=> {
         this.setState({ editingKey: key });
       }
-    
+      remove = (key)=> {
+        console.log(key)
+      }
       save = (form, key) => {
         form.validateFields((error, row) => {
           if (error) {
@@ -156,6 +162,18 @@ class Grounding extends Component{
       cancel = () => {
         this.setState({ editingKey: '' });
       };
+      onInsert = (value) => {
+        console.log(value)
+      }
+      onSearch = (value) => {
+        console.log(value)
+      }
+      onInsertHandle = (value) => {
+        console.log(value)
+      }
+      onSerachHandle = (value) => {
+        console.log(value)
+      }
     render(){
           
           const isEditing = (record) => {
@@ -177,18 +195,17 @@ class Grounding extends Component{
               }),
             };
           });
-          const components = {
-            body: {
-              row: EditableFormRow,
-              cell: EditableCell,
-            },
-          };
-      
+          
+          
         return (
             <div>
                 <MyTitle title="书本上架" />
                 <MyOperTable
+                    onSearch={this.onSearch}
+                    onInsert={this.onInsert}
                     components={components}
+                    onSerachHandle={this.onSerachHandle}
+                    onInsertHandle={this.onInsertHandle}
                     columns={columns}
                     onChange={(pagination, filters,sorter) => this.handChange(pagination, filters,sorter)}
                     data={this.state.data}

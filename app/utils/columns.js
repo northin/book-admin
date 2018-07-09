@@ -24,28 +24,38 @@ export function getbookColumns(sortedBookInfo,isEditing,that,EditableContext){
         dataIndex: 'id',
         key: 'id',
         sorter: (a, b) => (+a.id) - (+b.id),
+        type:'none',
+        search:true,
         sortOrder: sortedBookInfo.columnKey === 'id' && sortedBookInfo.order,
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: '书本名称',
         dataIndex: 'name',
         key: 'name',
+        editable: true,
+        search:true,
+        sorter: (a, b) => (+a.name.length) - (+b.name.length),
+        sortOrder: sortedBookInfo.columnKey === 'name' && sortedBookInfo.order,
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: '作者',
         dataIndex: 'author',
         key: 'author',
         editable: true,
+        search:true,
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: '国籍',
         dataIndex: 'country',
         key: 'country',
+        search:true,
+        type:'select',
         editable: true,
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: 'ISBN',
         dataIndex: 'isbn',
+        search:true,
         key: 'isbn',
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
@@ -56,12 +66,15 @@ export function getbookColumns(sortedBookInfo,isEditing,that,EditableContext){
     },{
         title: '图片',
         dataIndex: 'picture',
+        type:'file',
         key: 'picture',
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: '上架时间',
         dataIndex: 'groundingDate',
         key: 'groundingDate',
+        search:true,
+        type:"date"
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: '库存',
@@ -72,13 +85,16 @@ export function getbookColumns(sortedBookInfo,isEditing,that,EditableContext){
         title: '分类',
         dataIndex: 'classify',
         key: 'classify',
+        search:true,
         editable: true,
+        type:'select'
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: '出版社',
         dataIndex: 'company',
         key: 'company',
         editable: true,
+        search:true,
         // render: text => <div> {util.moneyFun.toMoney(text)} </div>
     },{
         title: '操作',
@@ -96,21 +112,28 @@ export function getbookColumns(sortedBookInfo,isEditing,that,EditableContext){
                             onClick={() => that.save(form, record.key)}
                             style={{ marginRight: 8 }}
                           >
-                            Save
+                            保存
                           </a>
                         )}
                       </EditableContext.Consumer>
                       <Popconfirm
-                        title="Sure to cancel?"
+                        title="确认取消?"
                         onConfirm={() => that.cancel(record.key)}
                       >
-                        <a>Cancel</a>
+                        <a>取消</a>
                       </Popconfirm>
                     </span>
                   ) : (
                       <span>
                         <a onClick={() => that.edit(record.key)}>修改</a>
-                        <a onClick={() => that.edit(record.key)}>删除</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Popconfirm
+                        title="确认删除?"
+                        onConfirm={() => that.remove(record.key)}
+                      >
+                        <a>删除</a>
+                      </Popconfirm>
+                        
                       </span>
                    
                   )}
