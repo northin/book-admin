@@ -154,17 +154,11 @@ class MbChange extends Component{
 }
 
 MbChange.propTypes = {
-    users: PropTypes.arrayOf(
-        PropTypes.shape({
-            // name: PropTypes.string.isRequired,
-            // age: PropTypes.number.isRequired,
-        }).isRequired
-    ).isRequired,
     userQueryAll: PropTypes.func.isRequired
 }
 const mapStateToProps  = state => {
     return {
-        users : state.user
+        // users : state.user
     }
 }
 const WrappedNormalLoginForm = Form.create()(MbChange);

@@ -31,6 +31,7 @@ const HisOrderQry = lazyLoad(() => import('@view/info/HisOrderQry'));
 const OrderQry = lazyLoad(() => import('@view/info/OrderQry'));
 const User = lazyLoad(() => import('@view/User'));
 const Grounding = lazyLoad(() => import('@view/fundManage/Grounding'));
+const Classify = lazyLoad(() => import('@view/fundManage/Classify'));
 class App extends Component{
     constructor(props){
         super(props)
@@ -53,7 +54,7 @@ class App extends Component{
                         <Route path="/app/info/hisOrderQry" component={HisOrderQry} />
                         <Route path="/app/info/orderQry" component={OrderQry} />
                         <Route path="/app/fund/Grounding" component={Grounding} />
-                        <Route path="/app/fund/charge" component={Charge} />
+                        <Route path="/app/fund/classify" component={Classify} />
                         <Route path="/app/fund/fundQry" component={FundQry} />
                         <Route component={NoFund} /> 
                     </Switch>

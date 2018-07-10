@@ -292,14 +292,14 @@ class MyOperTable extends BaseComponent {
         <Table
             columns={this.props.columns}
             dataSource={this.props.data}
-            onChange={this.handleChange}
+            // onChange={this.handleChange}
             components={this.props.components}
             rowClassName="editable-row"
             pagination={{
                 total:this.props.data.length,
                 pageSize:config.pageSize,
                 onChange(current){
-                    that.gotoCurrent(current,5)
+                    that.props.gotoCurrent(current,5)
                 },
                 showSizeChanger:true,
                 showTotal: () => ("共" + this.props.data.length + '条数据')

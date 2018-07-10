@@ -41,7 +41,7 @@ class MyTable extends BaseComponent {
                 total:this.props.data.length,
                 pageSize:config.pageSize,
                 onChange(current){
-                    that.gotoCurrent(current,5)
+                    that.props.gotoCurrent(current,5)
                 },
                 showSizeChanger:true,
                 showTotal: () => ("共" + this.props.data.length + '条数据')

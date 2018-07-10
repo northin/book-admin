@@ -7,7 +7,7 @@ import {
 import { Table, Icon, Divider,DatePicker, Input, InputNumber, Popconfirm, Form } from 'antd';
 import MyTitle from '@comp/myTitle.js'
 import MyOperTable from '@comp/myOperTable.js'
-import { getbookColumns} from '@util/columns.js';
+import { getClassifyColumns} from '@util/columns.js';
 import {components , EditableContext} from "@comp/myOperComp.js"
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const FormItem = Form.Item;
@@ -66,42 +66,50 @@ const FormItem = Form.Item;
 const data = [{
     key: '1',
     id:'1',
-    name: '舞舞舞',
-    author:'村上春树',
-    country:'日本',
-    store:'32',
-    price:'35.5',
-    classify:'1',
-    isbn:'13456',
-    groundingDate:'2017-12-12',
-    company:'中国出版社'
+    name:'科幻'
   }, {
     key: '2',
     id:'2',
-    name: '舞舞舞',
-    author:'村上春树',
-    country:'日本',
-    store:'32',
-    price:'35.5',
-    classify:'1',
-    isbn:'13456',
-    groundingDate:'2017-12-12',
-    company:'中国出版社'
+    name:'历史'
   }, {
     key: '3',
     id:'3',
-    name: '舞舞舞',
-    author:'村上春树',
-    country:'日本',
-    store:'32',
-    price:'35.5',
-    classify:'1',
-    isbn:'13456',
-    groundingDate:'2017-12-12',
-    company:'中国出版社'
+    name:'童书'
+  }, {
+    key: '4',
+    id:'4',
+    name:'童书'
+  }, {
+    key: '5',
+    id:'5',
+    name:'童书'
+  }, {
+    key: '6',
+    id:'6',
+    name:'童书'
+  }, {
+    key: '7',
+    id:'7',
+    name:'童书'
+  }, {
+    key: '8',
+    id:'8',
+    name:'童书'
+  }, {
+    key: '9',
+    id:'9',
+    name:'童书'
+  }, {
+    key: '10',
+    id:'10',
+    name:'童书'
+  }, {
+    key: '11',
+    id:'11',
+    name:'童书'
   }];
 
-class Grounding extends Component{
+class Classify extends Component{
 
     constructor(props){
         super(props)
@@ -125,7 +133,6 @@ class Grounding extends Component{
 
       }
       gotoCurrent = (current,pageSize,start,end) => {
-        console.log(current,pageSize,start,end)
       }
     handChange = (pagination, filters,sorter) => {
         this.setState({
@@ -180,7 +187,7 @@ class Grounding extends Component{
           const isEditing = (record) => {
             return record.key === this.state.editingKey;
           };
-          const bookColumns = getbookColumns(this.state.sortedBookInfo || {},isEditing,this,EditableContext)
+          const bookColumns = getClassifyColumns(this.state.sortedBookInfo || {},isEditing,this,EditableContext)
           const columns = bookColumns.map((col) => {
             if (!col.editable) {
               return col;
@@ -200,7 +207,7 @@ class Grounding extends Component{
           
         return (
             <div>
-                <MyTitle title="书本上架" />
+                <MyTitle title="书本分类" />
                 <MyOperTable
                     onSearch={this.onSearch}
                     onInsert={this.onInsert}
@@ -216,7 +223,7 @@ class Grounding extends Component{
         )
     }
 }
-Grounding.propTypes = {
+Classify.propTypes = {
     // users: PropTypes.arrayOf(
     //     PropTypes.shape({
     //         // name: PropTypes.string.isRequired,
@@ -240,4 +247,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Grounding)
+)(Classify)

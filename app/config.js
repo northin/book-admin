@@ -1,5 +1,5 @@
 export default{
-    pageSize : 4,
+    pageSize : 2,
     sendCode : {
         reg:401,
         find:402
